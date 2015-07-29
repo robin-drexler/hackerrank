@@ -2,13 +2,21 @@ test_cases = gets.to_i
 
 test_cases.times.each do
   amount, number_to_find_index = gets.split(' ').map(&:to_i)
-  range = (0...amount)
-  numbers = range.to_a
+  last_series = []
+  odds = 0
+  evens = 0
 
-  range.each do |i|
-    numbers[i...amount] = numbers[i...amount].reverse
+  amount.times.each do |i|
+    if i.even?
+      last_series.push(amount - 1 - evens)
+      evens += 1
+    else
+      last_series.push(odds)
+      odds +=1
+    end
+
   end
 
-  puts numbers.find_index {|n| n == number_to_find_index }
+  puts last_series.find_index {|n| n == number_to_find_index }
 end
 
